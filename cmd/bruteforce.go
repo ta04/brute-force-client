@@ -109,7 +109,7 @@ func bruteforce(args []string) {
 		}
 	}
 
-	log.Println("here are some possible Xs: ", possibleXs)
+	log.Println("here are some possible Xs:", possibleXs)
 
 	// calculate t
 	calculateTURL := fmt.Sprintf("http://localhost:5000/calculateT?g=%s&v=%d&n=%d",
@@ -137,7 +137,7 @@ func bruteforce(args []string) {
 	// Call AuthRPC1 from auth client
 	auth1Res, err := client.AuthRPC1(context.Background(), &proto.Auth1{Username: username, T: t})
 	if err != nil {
-		log.Println("failed to authenticate in auth1. err: ", err)
+		log.Println("failed to authenticate in auth1. err:", err)
 	}
 
 	c, err := strconv.ParseInt(auth1Res.C, 10, 64)
@@ -154,15 +154,15 @@ func bruteforce(args []string) {
 		r := strconv.FormatInt(int64(v-int(c)*int(x)), 10)
 
 		// Call AuthRPC2 from auth client
-		log.Println("trying to login with x = ", x)
+		log.Println("trying to login with x:", x)
 		auth2Res, err := client.AuthRPC2(context.Background(), &proto.Auth2{Username: username, R: r})
 		if err != nil {
-			log.Println("failed to authenticate in auth2. err: ", err)
+			log.Println("failed to authenticate in auth2. err:", err)
 		}
 
 		if auth2Res != nil && auth2Res.Token != "" {
 			token := auth2Res.Token
-			log.Println("logged in successfully. token: ", token)
+			log.Println("logged in successfully. token:", token)
 
 			break
 		}

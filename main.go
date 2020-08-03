@@ -15,8 +15,18 @@ limitations under the License.
 */
 package main
 
-import "github.com/ta04/brute-force-client/cmd"
+import (
+	"log"
+	"time"
+
+	"github.com/ta04/brute-force-client/cmd"
+)
 
 func main() {
+	start := time.Now()
+
 	cmd.Execute()
+
+	duration := time.Since(start)
+	log.Println("Bruteforce done in: ", duration)
 }
